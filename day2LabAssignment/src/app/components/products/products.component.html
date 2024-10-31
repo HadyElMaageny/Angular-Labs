@@ -1,0 +1,19 @@
+<select class="form-select my-4" aria-label="Default select example" [(ngModel)]="selectedCatId">
+    <option [value]="category.id" *ngFor="let category of categories">{{category.name}}</option>
+</select>
+
+<div class="row row-cols-1 row-cols-md-4 g-4">
+    <ng-container *ngFor="let product of products; trackBy:trackItem">
+        <div class="col" [class.d-none]="product.catId!=selectedCatId" *ngIf="product.quantity != 0">
+            <div class="card" [style.background-color]="(product.quantity == 1)? 'yellow': ''">
+                <img [src]="product.imgUrl" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{product.name}}</h5>
+                    <p class="card-text">Price: {{product.price}}</p>
+                    <p class="card-text">Quantity: {{product.quantity}}</p>
+                    <button class="btn btn-success" (click)="decreaseProducts(product)">Buy</button>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</div>
